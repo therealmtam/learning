@@ -30,4 +30,6 @@ TODO - forgot password
     - prevent user from reusing old password when generating a new one
 
 After account creation and password reset (forgot password) and verfication of an account via email, the flow requires users to go through the login page. This way, we separate these steps from the login / auth token creation steps.
+
+TODO - make a default schema of a user in the the users collection centralized in code so we don't have to dive into all the methods in the userDL to see what all are the superset of key values that make up a user in the users collection. Ex. adding "verified:true" in one method and "username:__, password:__" in another.
 */
