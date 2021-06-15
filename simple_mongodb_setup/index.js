@@ -131,6 +131,26 @@ const updateUser = async(client, userId, userKeyValuesToUpdate, removeKeys = fal
     console.log('User updates: ', result);
 };
 
+const findOne = async(client, lookupInfo) => {
+    const result = await client.db("assistant").collection("users").findOne(lookupInfo);
+
+    // result = { _id: 60c29c7b15e7f620c658c2c5, username: 'max' }
+    console.log('found user: ', result);
+};
+
+const deleteOne = async(client, lookupInfo) => {
+    const result = await client.db("assistant").collection("users").deleteOne(lookupInfo);
+
+    /*
+    result = {
+        result: { n: 1, ok: 1 },
+        deletedCount: 1,
+        ...
+    }
+    */
+    console.log('deleted user: ', result);
+};
+
 const main = async () => {
     /**
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
@@ -150,6 +170,14 @@ const main = async () => {
         // console.log('\n' + 'listed dbs => ' + '\n');
 
         // await createUser(client, {
+        //     username: 'max'
+        // });
+
+        // await findOne(client, {
+        //     username: 'max'
+        // });
+
+        // await deleteOne(client, {
         //     username: 'max'
         // });
 

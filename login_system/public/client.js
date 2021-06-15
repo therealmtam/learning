@@ -1,21 +1,19 @@
 'use strict';
 
-let authToken = null;
-let refreshToken = null;
-
-const getUserObjForTokenDecryption = (username) => ({ name: username })
-
 $(document).ready(() => {
     console.log('document.ready');
 
     const loginButton = $("button#login");
-    const afterButton = $("button#after");
-    const refreshButton = $("button#refresh");
+    const secureCallButton = $("button#secure_call");
+    const logoutButton = $("button#logout");
+    const verifyAccountButton = $("button#verify_account");
+    const createAccountButton = $("button#create_account");
 
     loginButton.click(async () => {
         const payload = {
-            username: 'max',
-            password: '1234'
+            username: 'max.c.tam@gmail.com',
+            password: '123456',
+            rememberMe: true
         };
 
         // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options
@@ -40,83 +38,97 @@ $(document).ready(() => {
         console.log('\n');
         console.log('login call response => ', response);
         console.log('\n');
-
-        /*
-        if user is authenticated (valid username and pwd), expect the auth token in the response = { auth: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoidXNlcm5hbWUiLCJpYXQiOjE2MjM1MzkzMjZ9.kDjUaCCsFMGq0wg7GAYQbUoh3kXPPREPPl0oOdTTuwE", refreshToken: "..." };
-
-        - The auth token can be set as a cookie in the header by the server or sent to the client for the client to then append to the header manually in code
-        - The refresh token is usually stored server-side for a user so that the server is the only one that can refresh the token and knows the user wants to persist their authorization
-        */
-
-        // set the token globally for reuse
-        authToken = response.auth;
-        refreshToken = response.refreshToken;
     });
 
-    afterButton.click(async () => {
-        const payload = {
-            secureInfoToSendToServer: 'asdasda'
-        };
-
-        // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-
-                // send the auth token in the header manually which will be decrypted to get the user's name
-                auth: authToken
-            },
-
-            // send the data needed for the request to be used if the auth token is valie
-            body: JSON.stringify(payload)
-        };
-
-        console.log('\n');
-        console.log('making a secure call => POST http://localhost:3000/after');
-        console.log(requestOptions);
-        console.log('\n');
-
-        let response = await fetch('http://localhost:3000/after', requestOptions);
-        response = await response.json();
-
-        console.log('\n');
-        console.log('secure call response => ', response);
-        console.log('\n');
-    });
-
-    refreshButton.click(async () => {
-        console.log('\n\n');
-        console.log('refreshToken => ', refreshToken);
-        console.log('\n\n');
-
-        // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options
+    logoutButton.click(async () => {
         const requestOptions = {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json',
-
-                // send the refresh token in the header manually which will be decrypted to get the user's name
-                refreshtoken: refreshToken, // <= FYI all headers are lowercase
+                'Content-Type': 'application/json'
             }
         };
 
         console.log('\n');
-        console.log('refreshing token call => POST http://localhost:3000/token/refresh');
+        console.log('logout call => POST http://localhost:3000/logout');
         console.log(requestOptions);
         console.log('\n');
 
-        let response = await fetch('http://localhost:3000/token/refresh', requestOptions);
+        let response = await fetch('http://localhost:3000/logout', requestOptions);
         response = await response.json();
 
         console.log('\n');
-        console.log('refresh token response => ', response);
+        console.log('logout call response => ', response);
+        console.log('\n');
+    });
+
+    secureCallButton.click(async () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        console.log('\n');
+        console.log('secure_info call => GET http://localhost:3000/secure_info');
+        console.log(requestOptions);
         console.log('\n');
 
-        /*
-        if the refresh token was valid, it would be used to generate a new auth token
-        */
-        // set the new auth token globally for reuse
-        authToken = response.auth;
+        let response = await fetch('http://localhost:3000/secure_info', requestOptions);
+        response = await response.json();
+
+        console.log('\n');
+        console.log('secure_info call response => ', response);
+        console.log('\n');
+    });
+
+    verifyAccountButton.click(async () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        console.log('\n');
+        console.log('verifyAccount call => GET http://localhost:3000/account/verify?user_id=___');
+        console.log(requestOptions);
+        console.log('\n');
+
+        let response = await fetch('http://localhost:3000/account/verify?user_id=60c82aadf3ae6b94b2c0d1fe', requestOptions);
+        response = await response.json();
+
+        console.log('\n');
+        console.log('verifyAccount call response => ', response);
+        console.log('\n');
+    });
+
+    createAccountButton.click(async () => {
+        const payload = {
+            username: 'max.c.tam@gmail.com',
+            password: '123456'
+        };
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+
+            // send the account creation info to the server
+            body: JSON.stringify(payload)
+        };
+
+        console.log('\n');
+        console.log('createAccount call => POST http://localhost:3000/account');
+        console.log(requestOptions);
+        console.log('\n');
+
+        let response = await fetch('http://localhost:3000/account', requestOptions);
+        response = await response.json();
+
+        console.log('\n');
+        console.log('createAccount call response => ', response);
+        console.log('\n');
     });
 });
