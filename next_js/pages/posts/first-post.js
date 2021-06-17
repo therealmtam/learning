@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import Head from 'next/head'
+import Layout from '../../components/layout'
+import LayoutAdvanced from '../../components/layoutAdvanced'
 
 /*
 - the route to this page is /posts/first-post
@@ -18,26 +20,36 @@ const FirstPostSubHeader = () => (
 const FirstPostMain = () => (
     <>
         {/*
-        https://nextjs.org/learn/basics/assets-metadata-css/metadata
-        - you can create a different <head> tag for each page by using the variable Head component
+        https://nextjs.org/learn/basics/assets-metadata-css/layout-component
+        - you can use a wrapper component to purely style the components beneath like using this new Layout component to assign styling to the below children components.
+        -
         */}
-        <Head>
+        {/* <Layout> */}
+        <LayoutAdvanced>
+
             {/*
-            - you can add meta, scripts, whatever you typically place in a <head> tag here
+            https://nextjs.org/learn/basics/assets-metadata-css/metadata
+            - you can create a different <head> tag for each page by using the variable Head component
             */}
-            <title>First Post</title>
-        </Head>
+            <Head>
+                {/*
+                - you can add meta, scripts, whatever you typically place in a <head> tag here
+                */}
+                <title>First Post</title>
+            </Head>
 
-        {/* one way to get a view component during runtime */}
-        {FirstPostSubHeader()}
+            {/* one way to get a view component during runtime */}
+            {FirstPostSubHeader()}
 
-        {/* another one way to get a view component during runtime */}
-        <h1>First PostB</h1>
-        <h2>
-            <Link href="/">
-                <a>Back to home</a>
-            </Link>
-        </h2>
+            {/* another one way to get a view component during runtime */}
+            <h1>First PostB</h1>
+            <h2>
+                <Link href="/">
+                    <a>Back to home</a>
+                </Link>
+            </h2>
+        </LayoutAdvanced>
+        {/* </Layout> */}
     </>
 );
 

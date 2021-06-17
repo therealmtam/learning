@@ -1,0 +1,22 @@
+
+/*
+https://nextjs.org/learn/basics/assets-metadata-css/layout-component
+- Important: To use CSS Modules, the CSS file name must end with .module.css.
+
+- https://nextjs.org/learn/basics/assets-metadata-css/polishing-layout
+*/
+.container {
+    max-width: 36rem;
+    padding: 0 1rem;
+    margin: 3rem auto 6rem;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.backToHome {
+    margin: 3rem 0 0;
+}

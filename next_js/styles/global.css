@@ -1,0 +1,42 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu,
+        Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    line-height: 1.6;
+    font-size: 18px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    color: #0070f3;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/*
+This class based global style will be overridden by a child style at the component level.
+
+ex. this (.layout_container__2t4v2) style is overridden by the
+
+    .container{} style in the components/layout.module.css that is used in the layout.js component
+
+*/
+.layout_container__2t4v2 {
+    max-width: 50rem;
+    padding: 0 5rem;
+    margin: 3rem auto 6rem;
+}
