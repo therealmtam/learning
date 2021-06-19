@@ -50,6 +50,11 @@ export default CopyOfFirstPostMain;
 export async function getServerSideProps(context) {
     const { req, res, query, resolvedUrl, locales, locale, defaultLocale } = context;
 
+    /*
+    HOOKS: react-hooks cannot be called outisde a function component such as here. This will throw an error
+    */
+    // const { globalStateValue, toggleGlobalStateValue } = useContext(ThemeContext);
+
     console.log('\n\n');
     console.log('getServerSideProps fired for copy-of-first-post => ');
     console.log('\n\n');
