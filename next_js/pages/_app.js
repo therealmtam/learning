@@ -27,12 +27,31 @@ import '../styles/global.css'
 import styles from '../styles/global_imported_as_module.css'
 // import '../styles/global.css'
 
-console.log('\n\n');
-console.log('styles,  => ', styles);
-console.log('\n\n');
+// for context provider
+import { createContext, useState } from 'react';
+export const ThemeContext = createContext();
 
+/*
+- Component is a page's parent component
+- pageProps is the initial props for the page from getServerSideProps or getInitialProps etc that will fetch the props for the entire page.
+
+Therefore, this App function (i.e., whatever is default exported by the _app.js file), is called after ex. getServerSideProps, gets called and will then let you do things to the page component like provide context, global style the page, create a global state using react hooks, etc.
+*/
 const App = ({ Component, pageProps }) => {
-    return <Component {...pageProps} />;
+
+    console.log('\n\n');
+    console.log('Component => ', Component);
+    console.log('pageProps => ', pageProps); // on the / path, the getServerSideProps props return value will show up here
+    console.log('\n\n');
+
+    // global hook (basically global data store)
+    const [ globalStateValue, toggleGlobalStateValue ] = useState(true);
+
+    return (
+        <ThemeContext.Provider value={{ globalStateValue, toggleGlobalStateValue }}>
+            <Component {...pageProps} />
+        </ThemeContext.Provider>
+    );
 }
 
 export default App;

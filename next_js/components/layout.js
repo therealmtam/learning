@@ -66,3 +66,13 @@ const Layout = ({ children }) => {
 )};
 
 export default Layout;
+
+
+/*
+next steps, do server-side getServerSideProps on initial fetch, then use react-hooks and react-query to do the login and fetch data.
+
+For react query, set the fetch interval to be default of 0 so it always fetches.
+
+So if you go to /pasad page, next will render the page given its own header etc.
+On initial call to server, it should take in a cookie to do some calls to determine what page to show the user, either the login
+*/

@@ -10,8 +10,11 @@ const fetchPlanets = async () => {
 
 const Planets = () => {
     /*
-    - useQuery(key to store it under, async function to go fetch the data)
-    - useQuery always returns with a { data, status } properties where data is the resolved data and status is status of the query.
+    - THIS IS THE API:
+
+        - useQuery( __key to store it under__  , async function to go fetch the data, options)
+
+        - useQuery always returns with a { data, status } properties where data is the resolved data and status is status of the query.
 
     - useQuery will manage the times in which it thinks it needs to refetch the data based on
         - interval (certain amount of time so next time the component loads fetch it if the interval has passed)
@@ -81,7 +84,7 @@ const Planets = () => {
             {status === 'loading' && (
                 <div>loading data...</div>
             )}
-            {status === 'success' && (
+            {status === 'success' && data.results && (
                 <div>{
                     data.results.map(planet => (<Planet key={planet.name} planet={planet} />))
                 }</div>

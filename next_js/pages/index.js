@@ -10,12 +10,13 @@ import utilStyles from '../styles/utils.module.css'
 https://nextjs.org/learn/basics/navigate-between-pages/pages-in-nextjs
 
 - pages/index.js is associated with the / route
-- The component can have any name (in this example it is Home), but you must export it as a default export which is all that matters.
+- The component can have any name (in this example it is Home), but you must export it as a default export which is all that matters AND you need to name it with capital letter.
+
+    https://reactjs.org/docs/components-and-props.html#function-and-class-components - React treats components starting with lowercase letters as DOM tags. For example, <div /> represents an HTML div tag, but <Welcome /> represents a component and requires Welcome to be in scope. To learn more about the reasoning behind this convention, please read JSX In Depth.
 
 => export default function thatReturnsJSX() { return (...a react component in JSX) }
 */
-export default function Home() {
-
+export default function Home(props) {
     /*
     - when you specify
     <Layout home>, the "home" word is a param that will be passed into the layout component as the boolean value true:
@@ -23,7 +24,6 @@ export default function Home() {
         So in the layoutAdvances.js, the home key = true
 
         export default function Layout({ children, home }) {}
-
 
     */
     return (
@@ -40,6 +40,46 @@ export default function Home() {
         </section>
         </Layout>
     )
+}
+
+/*
+https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-side-rendering
+
+- getServerSideProps, getInitialProps has a context
+
+    context = {
+        .. some other keys... see docs ^ for thie getServerSideProps
+        params:...,
+        req: requestObjectWithHeaderCookiesEtc.,
+        res: responseObject,
+        query: { apple: true, ..this holds query string params from the url },
+        resolvedUrl: '/posts/copy-of-first-post?apple=true', //this is the full url
+        locales: undefined,
+        locale: undefined,
+        defaultLocale: undefined
+    }
+
+- getServerSideProps and getInitialProps fire on every page request, client and server-side rendered requests.
+
+- For authentication, this method or in the _app.js (the global method following this method call) is where you would perform authentication for all pages (use _app.js), for only secure pages, (use the individual page's getServerSideProps). So when a request comes in, in the getServerSideProps, you can do the check  for a secure page and redirect to login. After you login, you need the global state of your app (stored client-side via the _app.js) to redirect you back to the protected page you wanted to go to.
+
+If you do a server-side request to a secure page, in the getServerSideProps, you would do the same thing, reroute the user to the login page. The user will get the data store in the _app.js.
+*/
+export async function getServerSideProps() {
+    return {
+        props: {
+            apple: 'tree'
+        },
+
+        /*
+        - https://aboutmonica.com/blog/creating-protected-routes-in-next-js-with-supabase
+        - this is how you dynamically redirect in next.js before rendering the page. So if you mamek an auth call here to validate the auth token before accessing what would be a secure page, you can redirect back to the login page. But after login, we would need to reroute back to this page somehow.
+
+        One way is to do a redirect to the login page, and when the user hits login using their username and password, they will send a request to the login api which returns success or failure to the client and the login page on the client then will need to redirect to the previous page the user was trying to access. The way the login page knows the previous page is for there to somehow be props to pass into the login page
+
+        */
+        // redirect: { destination: "/posts/first-post", permanent: true }
+    }
 }
 
 // export default function Home() {
