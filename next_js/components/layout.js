@@ -56,6 +56,11 @@ ex. <div class="layout_container__2t4v2"> ...children components </div>
 
 */
 
+/*
+NOTE - WE DO NOT HAVE TO IMPORT REACT FOR EVERY COMPONENT LIKE IN REGULAR REACT APPS BECAUSE NEXT DOES THIS FOR YOU.
+
+https://www.freecodecamp.org/news/an-introduction-to-next-js-for-everyone-507d2d90ab54/
+*/
 import styles from './layout.module.css'
 
 const Layout = ({ children }) => {

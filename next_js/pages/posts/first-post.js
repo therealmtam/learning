@@ -93,10 +93,12 @@ export async function getServerSideProps() {
     console.log('\n\n');
     console.log('getServerSideProps fired for first-post => ');
     console.log('\n\n');
+    const router = useRouter();
 
     return {
         props: {
             first_post: true
-        }
+        },
+        redirect: { destination: "/", permanent: false }
     }
 }

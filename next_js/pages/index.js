@@ -65,7 +65,12 @@ https://nextjs.org/docs/basic-features/data-fetching#getserversideprops-server-s
 
 If you do a server-side request to a secure page, in the getServerSideProps, you would do the same thing, reroute the user to the login page. The user will get the data store in the _app.js.
 */
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+
+    console.log('\n\n');
+    console.log('context => ', context);
+    console.log('\n\n');
+
     return {
         props: {
             apple: 'tree'
