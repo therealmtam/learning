@@ -49,7 +49,7 @@ const loginHandler = async (request, response) => {
     // -------------------------
 
     // use the user's id to generate the auth token
-    const userObjUsedToGenerateAuthToken = utils.getUserObjUsedToGenerateAuthToken(lookupResult._id);
+    const userObjUsedToGenerateAuthToken = utils.getUserObjUsedToGenerateAuthToken(lookupResult.user._id);
 
     const refreshToken = utils.generateRefreshToken(userObjUsedToGenerateAuthToken);
 
