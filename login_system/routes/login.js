@@ -67,7 +67,7 @@ const loginHandler = async (request, response) => {
         utils.generateNewAuthCookie(authToken)
     ]);
 
-    return response.status(200).json(utils.getResponseObj('successful login'));
+    return response.status(200).json(utils.getResponseObj('successful login', lookupResult.user));
 };
 
 module.exports = (app) => {
