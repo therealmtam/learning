@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+    <style>
+        .fifty-percent {
+            width: 100%;
+        }
+
+        .one-hundred-pixels {
+            width: 100px;
+        }
+
+        .parent {
+            width: 50vw;
+            font-size: 1rem;
+            border-color: black;
+            border-style: solid;
+            border-width: 2px;
+        }
+
+        .box {
+            border-color: #2AA9E0;
+            border-style: solid;
+            border-width: 1px;
+            border-radius: 15px;
+            /* padding: 2px; */
+            /* margin: 15px; */
+        }
+
+        .one-em {
+            font-size: 1em
+        }
+
+        .two-em {
+            font-size: 2em
+        }
+
+        .one-rem {
+            font-size: 1rem
+        }
+
+        .two-rem {
+            font-size: 2rem
+        }
+
+        /* -------------- */
+
+        /*
+        font margin?
+        */
+        .parent-two {
+            /* width: 100vw; */
+            font-size: 20px;
+            border-color: black;
+            border-style: solid;
+            border-width: 2px;
+            background-color: rgb(0, 213, 255);
+            padding-top: 5px;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-bottom: 5px;
+        }
+
+        .child-one {
+            background-color: rgb(26, 255, 0)
+        }
+        .child-two {
+            background-color: rgb(128, 32, 0)
+        }
+        .child-three {
+            background-color: orange
+        }
+        .ptag {
+            margin: 5px 5px
+        }
+        /* -------------------- */
+        .flexbox-container {
+            height: 700px;
+            display: flex; /* */
+            flex-direction: column;
+            justify-content: space-around; /* center, space-between, flex-start, flex-end*/
+            align-items: flex-start;
+            border: 1px black dotted;
+
+            /*multi line styles - it also has effect on flex-direction: row*/
+            /* flex-wrap: wrap; */
+            /* align-content: space-evenly; */
+        }
+
+        .flexbox-item {
+            width: 200px;
+            margin: 10px;
+            border-width: 2px;
+            border-color: black;
+            border-style: solid;
+            border-radius: 5px;
+            background-color: gray;
+            font-size: 2rem;
+        }
+
+        .flexbox-item1 {
+            min-height:  100px;
+            border: 1px red dashed
+        }
+
+        .flexbox-item2 {
+            min-height:  200px;
+            border: 1px blue dashed
+        }
+
+        .flexbox-item3 {
+            min-height:  300px;
+            border: 1px green dashed
+        }
+
+        li {
+            /* list-style-type: square; */
+        }
+
+        /*-------------*/
+        .nav {
+            /* display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            border: 1px black solid; */
+            /*------*/
+
+            display: inline-grid;
+            grid-template-columns: auto auto auto;
+            grid-gap: 1px;
+        }
+
+        .nav-item {
+            padding: 10px;
+            font-size: 10px;
+            box-shadow:0 0 0 1px green;
+            /*------*/
+        }
+
+        /* li > a {
+            display: inline-block;
+            border: 1px solid black
+        } */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /*--------------*/
+
+        .grid {
+            display: grid;
+            border: 1px solid black;
+            /* grid-template-rows: repeat(2, 4fr);
+            grid-template-columns: repeat(2, 4fr); */
+            grid-template-rows: 200px 100px;
+            grid-template-columns: 200px 100px;
+            /* grid-row-gap: 20px; pixels between rows */
+            /* grid-column-gap: 50px; pixels between columns */
+
+            /* border-collapse: collapse; */
+            /* -------- */
+            /* justify-content: space-evenly;
+
+            align-content: stretch;
+            height: 100vh; */
+            /* -------- */
+            /*
+            justify/align-items will default shrink the item containers to be defined within their grid box. Therefore, unless the items have padding, border, they will be reduced to the text content inside.
+
+            The default is that it is set to stretch and the contents of a container will be set to it's max grid item allowance.
+            */
+            justify-items: center;
+
+            align-items: center;
+            height: 100vh
+            /* -------- */
+        }
+
+        .grid-item {
+            /* width: 50px;
+            height: 50px; */
+            border: 2px solid red;
+            padding: 5px;
+        }
+
+        /* .item-1 {
+            grid-column-start: 1;
+            grid-column-end: -1;
+        }
+        .item-2 {
+            grid-column-start: 2;
+            grid-column-end: 3;
+        }
+        .item-3 {
+            grid-column-start: 3;
+            grid-column-end: 4;
+        }
+        .item-4 {
+            grid-column-start: 4;
+            grid-column-end: 5;
+        }
+        .item-5 {
+            grid-column-start: -1;
+            grid-column-end: 1;
+        } */
+
+        /* ------- */
+        /*
+        border-collapse case
+        ---
+
+        By adding a box-shadow to the outside border of the entire grid, you get the borders to be the same thickness and color as the borders in the grid gap
+        */
+        /* .container {
+            display: grid;
+            grid-template-columns: 100px 100px;
+            grid-gap:10px;
+        }
+
+        .block {
+            width: 100px;
+            height: 100px;
+            background-color: lightgrey;
+            box-shadow:0 0 0 10px palegreen;
+        }
+
+        .first {
+            grid-column-start: 2;
+            grid-column-end: -1;
+        } */
+    </style>
+
+</head>
+<body>
+    <a href="nextpage.html">NextPage</a>
+    <div class="parent">
+        <div class="box fifty-percent">50%</div>
+        <hr>
+        <div class="box fifty-percent one-em">50%</div>
+        <hr>
+        <div class="box fifty-percent two-em">50%</div>
+        <hr>
+        <div class="box fifty-percent one-rem">50%</div>
+        <hr>
+        <div class="box fifty-percent two-rem">50%</div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="parent-two">
+        <p class="ptag">Parent</p>
+        <div class="child-one">One</div>
+        <div class="child-two">Two</div>
+        <div class="child-three">Three</div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="flexbox-container">
+        <div class="flexbox-item flexbox-item1">One</div>
+        <div class="flexbox-item flexbox-item2">Two</div>
+        <div class="flexbox-item flexbox-item3">Three</div>
+    </div>
+
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>3</li>
+    <li>3</li>
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+            Column
+            </div>
+            <div class="col">
+            Column
+            </div>
+            <div class="col">
+            Column
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+
+    <div class="container">
+        <div class="row row-cols-4">
+            <div class="col">Column</div>
+            <div class="col">Column</div>
+            <div class="col">Column</div>
+            <div class="col">Column</div>
+        </div>
+    </div>
+
+    <br>
+    <hr>
+    <br>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col-6">
+      2 of 3 (wider)
+    </div>
+    <div class="col">
+      3 of 3
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col-5">
+      2 of 3 (wider)
+    </div>
+    <div class="col">
+      3 of 3
+    </div>
+  </div>
+</div>
+
+    <br>
+    <hr>
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">Column</div>
+            <div class="col">Column</div>
+            <div class="col">Column</div>
+            <div class="col">Column</div>
+        </div>
+    </div>
+
+    <header style="padding-top: 12px; padding-left: 12px; margin-bottom: 20px;">
+        <a style="font-size:20px; font-weight: bold; color: orange; padding-bottom: 5px; border-color: gray;    border-bottom: 3px solid #D6D6D6;">Maximilian Tam</a>
+    </header>
+    <nav>
+        <ul class="nav" style="margin-left: 12px">
+            <li class="nav-item"><a href="#" style="text-decoration: none;font-weight: bold;color:black;font-size: 20px;">profile</a></li>
+            <li class="nav-item"><a href="#" style="text-decoration: none;font-weight: bold;color:black;font-size: 20px;">name</a></li>
+            <li class="nav-item"><a href="#" style="text-decoration: none;font-weight: bold;color:black;font-size: 20px;">about me</a></li>
+        </ul>
+    </nav>
+
+    <!-- .nav-item {
+            padding: 10px;
+            /* border: 1px green solid; */
+            font-size: 10px;
+            box-shadow:0 0 0 1px green;
+            /*------*/
+        } -->
+
+
+    <br>
+    <br>
+
+    <nav style="margin-left: 12px;">
+        <a href="#" style="text-decoration: none;font-weight: bold;color:black;font-size: 20px; padding: 10px; box-shadow:0 0 0 1px green;">profile</a>
+        <a href="#" style="text-decoration: none;font-weight: bold;color:black;font-size: 20px; padding: 10px; box-shadow:0 0 0 1px green;">name</a>
+        <a href="#" style="text-decoration: none;font-weight: bold;color:black;font-size: 20px; padding: 10px; box-shadow:0 0 0 1px green;">about me</a>
+
+        <br>
+        <br>
+        <br>
+
+
+        <ul class="nav">
+            <li><a href="#" style="text-decoration: none;font-weight: bold;color:black;font-size: 20px; padding: 10px; box-shadow:0 0 0 1px green;">profile</a></li>
+            <li><a href="#" style="text-decoration: none;font-weight: bold;color:black;font-size: 20px; padding: 10px; box-shadow:0 0 0 1px green;">name</a></li>
+            <li><a href="#" style="text-decoration: none;font-weight: bold;color:black;font-size: 20px; padding: 10px; box-shadow:0 0 0 1px green;">about me</a></li>
+        </ul>
+    </nav>
+
+
+    <br>
+    <hr>
+
+    <div class="grid">
+        <div class="grid-item item-1">1</div>
+        <div class="grid-item item-2">2</div>
+        <div class="grid-item item-3">3</div>
+        <div class="grid-item item-4">4</div>
+        <div class="grid-item item-5">5</div>
+    </div>
+
+    <br>
+    <hr>
+
+    <div class='container'>
+        <div class='block first'>1</div>
+        <div class='block'>2</div>
+        <div class='block'>3</div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
