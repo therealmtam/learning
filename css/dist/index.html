@@ -152,9 +152,9 @@
             border: 1px solid black
         } */
 
-        * {
+        /* * {
             box-sizing: border-box;
-        }
+        } */
 
         /*--------------*/
 
@@ -192,6 +192,36 @@
             height: 50px; */
             border: 2px solid red;
             padding: 5px;
+        }
+
+        .boxsizing, .apple {
+            width: 50px;
+            height: 50px;
+        }
+
+        .flexclass {
+            border: 5px solid black;
+            margin-bottom: 200px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flexclass div {
+            border: 2px solid red;
+        }
+
+        .flexclass div p {
+            margin: 5px;
+            padding: 10px;
+            border: 2px solid cyan;
+            font-size: 10px;
+        }
+
+        .atag:hover {
+            cursor: pointer;
+            color: red;
         }
 
         /* .item-1 {
@@ -243,6 +273,7 @@
 
 </head>
 <body>
+    <p style='position: fixed; top: 0px;'>HELLO</p>
     <a href="nextpage.html">NextPage</a>
     <div class="parent">
         <div class="box fifty-percent">50%</div>
@@ -408,6 +439,41 @@
         <div class='block first'>1</div>
         <div class='block'>2</div>
         <div class='block'>3</div>
+    </div>
+
+    <p class='boxsizing'>
+        haro ro
+    </p>
+
+    <p class='apple'>
+        haro ro apple
+    </p>
+
+    <hr/>
+
+    <div class='flexclass'>
+        <div class='centercolumn'>
+            <p>center this</p>
+            <p>AND this</p>
+        </div>
+    </div>
+
+    <!-- <div class='navbar' style='position: fixed; top: 0px; width: 200px; height: 100vw; background-color: aqua;'>
+
+    </div> -->
+    <div style='max-width: 850px; margin-left: auto; margin-right: auto;'>
+        <header style='margin-bottom: 20px;'>
+            <a style='font-size: 40px; border-bottom: 5px solid gray;'>
+                Maximilian Tam
+            </a>
+        </header>
+        <nav style='display: flex; justify-content: space-between;'>
+            <a class='atag' style='font-size: 30px; text-decoration: none;'>beginnings</a>
+            <a href=index.html class='atag' style='font-size: 30px; text-decoration: none'>now</a>
+            <a class='atag' style='font-size: 30px; text-decoration: none'>tech</a>
+            <a class='atag' style='font-size: 30px; text-decoration: none'>talks</a>
+            <a class='atag' style='font-size: 30px; text-decoration: none'>connect</a>
+        </nav>
     </div>
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
