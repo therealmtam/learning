@@ -104,12 +104,20 @@
                 notShowing = true;
             }
 
-            // if both are in keydown state
-            if (keyPressState.Alt && keyPressState.Space && notShowing) {
-                showModal();
+            if (keyPressState.Alt && keyPressState.Space) {
+                // if both are in keydown state and it is not showing
+                if (notShowing) {
+                    showModal();
 
-                // toggle state
-                notShowing = false;
+                    // toggle state
+                    notShowing = false;
+                } else {
+                // if both are in keydown state and it is showing
+                    hideModal();
+
+                    // toggle state
+                    notShowing = true;
+                }
             }
         }
 
