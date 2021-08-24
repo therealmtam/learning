@@ -9,46 +9,141 @@
 <body>
     <h2>Scratch</h2>
     <div class='summonModalBackground' style=
-        'display: none;
-        position: fixed;
-        z-index: 7000;
-        padding-top: 100px;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0, 0, 0);
-        background-color: rgba(0, 0, 0, 0.4);'
-    >
-        <div class='modalContainer' style=
+            'display: none;
+            position: fixed;
+            z-index: 7000;
+            padding-top: 100px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);'
+        >
+        <div id='modalContainer' style=
             'width: 70%;
-            height: 300px;
+            height: 100px;
             background-color: white;
             border-radius: 5px;
-
-            '
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly'
         >
             <p id='pTagOfModal' style=
-                'font-size: 20px;'
+                'font-size: 20px;
+                margin: 0px;
+                margin-left: 10px;'
             >HARO</p>
+            <input id='inputTagOfModal'
+                type="text"
+                style=
+                'width: 70%;
+                margin-left: 10px;
+                '
+                onkeydown='event.key === "Enter" ? onEnterPress(this.value) : () => {}'
+                oninput='autoSuggest(this.value)'
+                placeholder="Search.."
+            >
         </div>
     </div>
 
     <script>
-        let state = true;
-        window.onclick = (event) => {
-            const modalBackground = document.getElementsByClassName("summonModalBackground")[0];
-            if (state) {
+        const autoSuggest = (value) => {
+            console.log('here ', value);
 
-                modalBackground.style.display = "flex";
-                modalBackground.style.alignItems = "center";
-            } else {
-                modalBackground.style.display = "none";
+            // fetch suggested commands based on inputValue
+            // show a dropdown of the suggested commands returned
+        };
+
+        const onEnterPress = (textInput) => {
+            // send the command to the background
+            // background will respond if command is invalid
+                // show an error on the modal
+
+            // else background will execute the script
+            // hide the modal if script is executing
+        };
+
+        const hideModal = () => {
+            const modalBackground = document.getElementsByClassName("summonModalBackground")[0];
+            modalBackground.style.display = "none";
+        };
+
+        const showModal = () => {
+            const modalBackground = document.getElementsByClassName("summonModalBackground")[0];
+            modalBackground.style.display = "flex";
+            modalBackground.style.alignItems = "center";
+            modalBackground.style.justifyContent = "center";
+
+            // set cursor on input field
+            document.getElementById('inputTagOfModal').focus();
+        };
+
+        // TODO - do state tracking for all other keys to ensure just these 2 are pressed
+        const keyPressState = {
+            Alt: false,
+            Space: false
+        };
+
+        let notShowing = true;
+
+        document.onkeydown = (event) => {
+            if (event.key === 'Alt') {
+                keyPressState.Alt = true;
             }
 
-            // toggle state
-            state = !state;
+            if (event.code === 'Space') {
+                keyPressState.Space = true;
+            }
+
+            // hide modal on esc
+            if (event.key === 'Escape') {
+                hideModal();
+
+                // toggle state
+                notShowing = true;
+            }
+
+            // if both are in keydown state
+            if (keyPressState.Alt && keyPressState.Space && notShowing) {
+                showModal();
+
+                // toggle state
+                notShowing = false;
+            }
+        }
+
+        document.onkeyup = (event) => {
+            if (event.key === 'Alt') {
+                keyPressState.Alt = false;
+            }
+
+            if (event.code === 'Space') {
+                keyPressState.Space = false;
+            }
+        };
+
+        // ---------------------------
+        // install the functions and listeners below into the webapp
+        // ---------------------------
+        window.onclick = (event) => {
+            console.log('\n\n');
+            console.log('event => ', event);
+            console.log('notShowing => ', notShowing);
+            console.log('\n\n');
+
+            if (!notShowing) {
+                if (
+                    event.target !== document.getElementById('modalContainer') &&
+                    event.target !== document.getElementById('pTagOfModal') &&
+                    event.target !== document.getElementById('inputTagOfModal')) {
+
+                    hideModal();
+
+                    // toggle state
+                    notShowing = true;
+                }
+            }
         };
     </script>
 </body>
