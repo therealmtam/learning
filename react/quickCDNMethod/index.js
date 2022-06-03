@@ -1,10 +1,20 @@
-/* Surprise! You probably thought you could just forget
-the line of code you just learned! Nope, not on my watch!
+//======================
+// notice how CDN method of React development doesn't require the importation of React or ReactDOM or CSS loader or Style Loader (bundler related tools).
+//======================
 
-Try to write that 1-liner of React code again! This time,
-see if you can figure out how to render an <ul> with 2+ <li>s inside*/
+//======================
+// example of a function the returns JSX
+const page = () => (<h1>haro</h1>);
 
-ReactDOM.render(
-    <ul><li>Thing 1</li><li>Thing 5</li></ul>,
-    document.getElementById("root")
-)
+// example of a React component with Pascal name
+function Page2 () {
+  return (<h1 className="test">haro1</h1>);
+}
+
+//======================
+
+// ReactDOM.render(page(), document.getElementById('root')); // works but "page" is not a react component, just a function that returns JSX.
+
+// ReactDOM.render(<page />, document.getElementById('root')); // won't work because "page" is not a React component which requires the use of Pascal case in the name.
+
+ReactDOM.render(<Page2 />, document.getElementById('root'));

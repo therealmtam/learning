@@ -6,8 +6,17 @@ see if you can figure out how to render an <ul> with 2+ <li>s inside*/
 
 import React from "react" // needed for React versions below 17
 import ReactDOM from "react-dom"
+import "./index.css" // needed for use of the style sheets applicable to the React code in this scope. This is necessary for bundler way of writing React
+
+function Component() {
+  return (<ul>
+      <li>Thing 1</li>
+      <li>Thing 3</li>
+      <p className="test">test</p>
+    </ul>)
+}
 
 ReactDOM.render(
-    <ul><li>Thing 1</li><li>Thing 3</li></ul>,
+    <Component/>,
     document.getElementById("root")
 )
