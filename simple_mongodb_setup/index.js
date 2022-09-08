@@ -156,7 +156,7 @@ const main = async () => {
      * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
      * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
      */
-    const uri = "mongodb://localhost:27017"; //ex. "mongodb+srv://<user>:<password>@<cluster-url>?retryWrites=true&w=majority";
+    const uri = "mongodb://localhost:27017"; //ex. in a deployed environment it is "mongodb+srv://<user>:<password>@<cluster-url>?retryWrites=true&w=majority";
     const client = new MongoClient(uri);
 
     try {
