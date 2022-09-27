@@ -152,6 +152,13 @@ React -
 - Functional components vs Class components
   - Functional components with useEffect and useState is the better and new way of doing things vs Class components of React.
 
+-----------------------
+SETUP PROXY in create-react-app
+-----------------------
+- https://create-react-app.dev/docs/proxying-api-requests-in-development/
+- For local development, because the host is not the same host as you would have during a production deployment where the host is the url, you need a proxy to proxy to production servers.
+
+- To do this, use React's setupProxy method of adding middleware during local development.
 
 -----------------------
 INTERVIEW - HTML
