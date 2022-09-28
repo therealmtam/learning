@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "start": "node tutorial.js"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.1"
+  }
+}
