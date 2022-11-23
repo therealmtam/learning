@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 
 /*
 https://www.npmjs.com/package/dotenv
+- validation options
+  - https://joi.dev/api/?v=17.7.0#anyvalidatevalue-options
 //--------------------------
 - the location that dotenv.config() looks for a .env file is the process.cwd() which is the dir where the node process is executed from.
 
