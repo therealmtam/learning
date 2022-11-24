@@ -51,6 +51,17 @@ https://www.npmjs.com/package/dotenv
       path: '/Users/maxtam/Desktop/development/z-previous/learning/dotenv/file/.env'
     }
   }
+//--------------------------
+- dotenv WILL PRIORITIZE process level env vars over .env file level env vars.
+
+  EXAMPLE:
+  const config = dotenv.config(); // where DUMMY1 is in the .env file set to 'true'
+  // if you use > DUMMY1=false node notes.js,
+  config = {
+    parsed: {
+      DUMMY1: 'false'
+    }
+  }
 
 // ===========================
 // RECOMMENDED USAGE
