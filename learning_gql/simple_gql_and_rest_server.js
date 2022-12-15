@@ -59,31 +59,44 @@ const resolvers = {
     },
 };
 
-// =================
-// configure the server
-// =================
-const port = 4000;
+const serverStart = async() => {
+  // =================
+  // configure the server
+  // =================
+  const port = 4000;
 
-const apolloServer = new ApolloServer({
-    typeDefs,
-    resolvers,
-});
+  const apolloServer = new ApolloServer({
+      typeDefs,
+      resolvers,
+  });
 
-apolloServer.applyMiddleware({ app });
+  // https://www.apollographql.com/docs/apollo-server/v3/integrations/middleware/#apollo-server-express - need to await the server start which starts on new ApolloServer before applying as middleware
+  await apolloServer.start();
 
-// =================
-// register RESTful routes
-// =================
-app.get('/test', (req, res) => res.send('test is good!'));
+  apolloServer.applyMiddleware({ app });
 
-// =================
-// start / turn-on the server
-// =================
-app.listen({ port }, () => {
-    console.log(
-        `Graphql endpoint is at http://localhost:${port}${apolloServer.graphqlPath}`
-    );
-    console.log(
-        `RESTful endpoints are ready too! => http://localhost:${port}/_your_endpoint_path_`
-    );
-});
+  // =================
+  // register RESTful routes
+  // =================
+  app.get('/test', (req, res) => res.send('test is good!'));
+
+  // =================
+  // start / turn-on the server
+  // =================
+  const startExpressServer = new Promise ((resolve, reject) => {
+    app.listen({ port }, () => {
+        console.log(
+            `Graphql endpoint is at http://localhost:${port}${apolloServer.graphqlPath}`
+        );
+        console.log(
+            `RESTful endpoints are ready too! => http://localhost:${port}/_your_endpoint_path_`
+        );
+        resolve()
+    });
+  })
+
+  await startExpressServer
+}
+
+// start the server
+serverStart()

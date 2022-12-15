@@ -81,50 +81,63 @@ const resolvers = {
     },
 };
 
-// =================
-// configure the server
-// =================
-const port = 4000;
+const serverStart = async() => {
+  // =================
+  // configure the server
+  // =================
+  const port = 4000;
 
-const apolloServer = new ApolloServer({
-    typeDefs,
-    resolvers,
-});
+  const apolloServer = new ApolloServer({
+      typeDefs,
+      resolvers,
+  });
 
-/*
-apply the apollo server as middleware to the express server so it will create a /graphql endpoint on your server where you can make graphql requests by calling
+  // https://www.apollographql.com/docs/apollo-server/v3/integrations/middleware/#apollo-server-express - need to await the server start which starts on new ApolloServer before applying as middleware
+  await apolloServer.start();
 
-POST .../graphql
-requestBody = {
-    // in the body will be the graphql query as a string
+  /*
+  apply the apollo server as middleware to the express server so it will create a /graphql endpoint on your server where you can make graphql requests by calling
+
+  POST .../graphql
+  requestBody = {
+      // in the body will be the graphql query as a string
+  }
+
+  https://www.apollographql.com/blog/backend/using-express-with-graphql-server-node-js/
+  */
+  apolloServer.applyMiddleware({ app });
+
+  // =================
+  // register RESTful routes
+  // =================
+
+  /*
+  since we are just applying the apollo server as middleware to our express server, you could add REST endpoints on your express server as well if you want.
+
+  If you wanted a node server that was purely dedicated to serve only graphql queries and will never have RESTful endpoints, see the simple_gql_server for this implementation.
+  */
+  app.get('/test', (req, res) => res.send('test is good!'));
+
+  // =================
+  // start / turn-on the server
+  // =================
+  const startExpressServer = new Promise ((resolve, reject) => {
+    app.listen({ port }, () => {
+        console.log(
+            `Graphql endpoint is at http://localhost:${port}${apolloServer.graphqlPath}`
+        );
+        console.log(
+            `RESTful endpoints are ready too! => http://localhost:${port}/_your_endpoint_path_`
+        );
+        resolve()
+    });
+  })
+
+  await startExpressServer
 }
 
-https://www.apollographql.com/blog/backend/using-express-with-graphql-server-node-js/
-*/
-apolloServer.applyMiddleware({ app });
-
-// =================
-// register RESTful routes
-// =================
-
-/*
-since we are just applying the apollo server as middleware to our express server, you could add REST endpoints on your express server as well if you want.
-
-If you wanted a node server that was purely dedicated to serve only graphql queries and will never have RESTful endpoints, see the simple_gql_server for this implementation.
-*/
-app.get('/test', (req, res) => res.send('test is good!'));
-
-// =================
-// start / turn-on the server
-// =================
-app.listen({ port }, () => {
-    console.log(
-        `Graphql endpoint is at http://localhost:${port}${apolloServer.graphqlPath}`
-    );
-    console.log(
-        `RESTful endpoints are ready too! => http://localhost:${port}/_your_endpoint_path_`
-    );
-});
+// start the server
+serverStart()
 
 // =================
 // TLDR:
