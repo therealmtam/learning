@@ -51,9 +51,36 @@ initial setup
 
           - https://jestjs.io/docs/getting-started#using-typescript
 
+
 - after the config file is built, (not the TS version of the config which requires more research ^), you can just do the same as the basic config and run
 
   > yarn test
 
+--------
+TYPESCRIPT test running (not config file with ts)
+
+- to have test files that are ts driven using ts-jest
+
+  - NOTE there are other ts ways to do this but we just cover ts-jest
+
+    - https://jestjs.io/docs/getting-started#using-typescript
+
+- so run > jest --init and output a js config file
+
+- then you need to install ts-jest
+
+  - run > npm install --save-dev ts-jest
+
+  - https://jestjs.io/docs/getting-started#via-ts-jest
+
+  - https://kulshekhar.github.io/ts-jest/docs/getting-started/installation/#jest-config-file
+
+  - then run >npx ts-jest config:init which will write a bare bones config just for jest to be able to run ts files using ts-jest
+
+      - https://jestjs.io/docs/getting-started#via-ts-jest
+
+  - then you run > npm i --save-dev @types/jest to install the package needed for the describe/test/expect to be available for ts-jest to work
+
+  - now you can run > yarn run test and the ts spec files will work
 
 */
