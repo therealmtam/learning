@@ -90,7 +90,7 @@ const getPoolInstance = () => {
     const host = process.env.HOST || ''           //ex. 'localhost'
     const port = Number(process.env.PORT) || 3306 //ex. 3306
     const user = process.env.USER || ''           //ex. 'root'
-    const password = process.env.PASSWORD || ''   //ex. 'test'
+    const password = process.env.PASSWORD || ''   //ex. '12345678'
     const database = process.env.DATABASE || ''   //ex. 'test'
     const charset = 'utf8mb4'
 
