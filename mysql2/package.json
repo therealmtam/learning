@@ -5,7 +5,8 @@
   "main": "notes.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "mysql2js": "node mysql2.js"
+    "mysql2js": "node mysql2.js",
+    "mysql2mjs": "node  --experimental-modules  mysql2.mjs"
   },
   "author": "",
   "license": "ISC",
