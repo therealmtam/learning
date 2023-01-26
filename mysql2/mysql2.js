@@ -138,8 +138,5 @@ const main = async () => {
 }
 
 Promise.all[
-  main(),
-  main(),
-  main(),
   main()
 ];
