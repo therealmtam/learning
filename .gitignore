@@ -4,5 +4,7 @@ yarn.lock
 coverage
 *dist
 * - ignore
-* - ignore.js
+* - ignore.*
 ignore.js
+*.sql
+*.db
