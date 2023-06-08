@@ -21,7 +21,7 @@
     "strictPropertyInitialization": false
   },
   "include": [
-    "gqlEslint/**/*.ts",
+    "*.ts",
   ],
   "exclude": ["node_modules", "build"]
 }
