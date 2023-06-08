@@ -1,0 +1,28 @@
+type Astronaut {
+    id: ID!
+    name: String
+    missions: [Mission]
+}
+
+type Mission {
+    id: ID!
+    crew: [Astronaut]
+    designation: String!
+    startDate: String
+    endDate: String
+}
+
+type Query {
+    astronaut(id: ID!): Astronaut
+    astronauts: [Astronaut]
+
+    mission(id: ID!): Mission
+    missions: [Mission]
+    # user: User!
+}
+
+type User {
+  id: ID!
+  name: String!
+#   name: Int
+}
