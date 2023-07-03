@@ -1,0 +1,42 @@
+# https://docs.docker.com/compose/gettingstarted/#step-3-define-services-in-a-compose-file
+
+services:
+  web:
+    # this uses an image built from the Dockerfile in the . directory
+    build: .
+    ports:
+      # this binds the container's port to the host port 
+      # <host port you can access using http://localhost:9000/>:<container port>
+      - "9000:5000"
+
+  redis:
+    image: "redis:alpine"
+
+    # as a custom edit I tested - you can expose the docker port of the redis instance to localhost by binding the port as it is done in the ^web service
+    # ports:
+    #   - "8001:6379"
+
+  # note - docker lowercase naming for images, so it is best to not use camel case or pascal case and use dashes instead? Not sure. But this field name verbatim is used in naming of the container and sometimes image. It it not consistent.
+  myOwnCustomImage:
+    image: "maxctam/extended-node-image:latest"
+
+# When `docker compose up` is run in the `composetest` directory, 
+
+# - this script will generate 2 images:
+#   - 1 using the Dockerfile locally - and it will tag it with the name
+#   <folderName>-<serviceName> <= "composetest-web"
+
+#   - 1 using using the "redis:apline" public image and tag it with the
+#   serviceName < "redis"
+
+# - You will see then see images appear in the Docker Desktop
+
+# - It will also run the images in a SINGLE container named "composetest" which is the name of the directory.
+#   - in the notes.js > the image building and running of a container using the image are 2 separate steps. With `docker compose up` it does both
+
+#     - you can separate the building of images and creation of containers but not have the containers run by adding options to the docker comose command
+#       ex. > docker-compose up --no-start
+
+# - This creates a self contained environment and can include persisted storage (see the `docker-persisted-volume` notes I have on how persisted storage gets created)
+
+# Cleanup note: When deleting containers from a docker composed container that contains containers with volumnes, you need to then manaully delete the volumes as well unlike it it was a singular container that just housed a redis or other volume containing application.
