@@ -104,4 +104,52 @@ NO CODE MIGRATION PROCESS:
 
 This ^ should solve the time stamp issue and favorites migration issue
 
+===============
+NO CODE MIGRATION UPDATE:
+
+GOTCHAS:
+- https://discussions.apple.com/thread/254388498
+1) when creating a new Photos library (Option + click on Photos app icon), sometimes the library will show the error "this item cannot be added to your photo library because it may be an unrecognizable file format" when trying to import the Photos exported media ^ (media being exported as Originals with include xmp file and aae files with images and videos).
+
+The fix is to recreate the new Photo Library after restarting your comp.
+
+I encountered this after creating / deleting / creating / deleting, photo libraries and all of a sudden I couldn't import the same photos I had been able to a second ago.
+
+
+2) It is faster to create a new Photos Library on your comp and import files there and then move the library to an external hard drive VS create the photo library on your comp, import a photo to make sure imports to it work and you don't face GOTCHA (1) and then move the library to an external and finish importing files there.
+
+This is because even with SSD drive, it is super slow during the import of photos to a library that is not on your computer.
+
+I assume there is a lot of processing that happens in Photos app (pulling in the xmp files and aae files in the same directory of the media you are importing) and also indexing etc done by the app such that there is a DB and probably other things tied to the Photos app
+
+3) It is important that when you export Photos from one Photos library, you collocate all XMP and AAE files WITH the media files (images + videos) because when you import those to a new Photos Library by dragging an image or mov from the exported folder to Photos, Photos will look for XMP and AAE files in the same directory as the media and automatically pull those in for you which is nice.
+
+
+
+NEW PROCESS:
+
+- create a new folder in a directory on your comp to house the exported data
+
+- in Photos app, add the keyword "favorite" to all favorited (heart) photos in iphoto - this will be exported and tied to the original media in an accompanying xmp file along side the original media file
+
+- in Photos app, select and export the desired media as Originals and click on selecting iptc data exported as xmp
+
+This will take a few hours as it has to pull media from icloud and local and replicate it to your target folder. It is a reliable process, so iteration on these ^ steps is not really necessary unless there are no aae or xmp files outputed for some reason during export.
+
+NOTE:
+  - if there isn't enough space on the comp, you may not be able to export all the media. If, so move some of the desktop Photos libraries to the 2 SSDs by replicating it to BOTH first before removing it from the Mac comp.
+
+  - if you were able to export all the photos to the target folder, CHECK THE SIZE OF THE FOLDER AGAINST THE SPACE LEFT ON YOUR COMP to ensure you have enough to duplicate all the media in Photos during import.
+
+  If you don't have enough space, the quantity of media exported needs to be reduced so this whole process works.
+
+- close photos and hold Option + click the Photos app icon and create a new Photos library that you will be importing the exported media into. (Note - per the Gotchas, don't do the import process on an SSD because it is way too slow. Do the importing on the mac itself then move the Photos library over to BOTH SSDs after for dual backup)
+
+- then test whether there is GOTCHA(1) issue by dragging one of the exported media files to the new Photo Library to ensure there is no import issue.
+
+- then if it works, drag all the rest of the media.
+
+This will take not as long as the EXPORT step but maybe 30 to an hour for 355 GBs of media.
+
+
 */
